@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const authRepository = require('../repositories/auth_repository');
-const {authValidator, validateRegister} = require('../validators/auth_validators');
+const {validateRegister} = require('../validators/auth_validators');
 
 async function register(userData)
 {

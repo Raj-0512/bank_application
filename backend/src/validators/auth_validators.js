@@ -36,7 +36,7 @@ function validateRegister(userData)
         throw new Error("Invalid phone number");
     }
 
-    if (!userData.password)
+    if (!userData.password || userData.password.trim() === "")
     {
         throw new Error("Password is required");
     }
@@ -66,6 +66,32 @@ function validateRegister(userData)
     }
 }
 
+function validateLogin(userData)
+{
+    if (!userData.email || userData.email.trim() === "")
+    {
+        const error =  new Error("Email is required");
+        error.status = 400;
+        throw error;
+    }
+
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    if(!emailRegex.test(userData.email))
+    {
+        const error = new Error("Invalid email");
+        error.status = 400;
+        throw error;
+    }
+
+    if(!userData.password || userData.password.trim() === "")
+    {
+        const error = new Error("Password is required");
+        error.status = 400;
+        throw error;
+    }
+}
+
 module.exports = {
-    validateRegister
+    validateRegister , validateLogin
 };
